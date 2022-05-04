@@ -20,12 +20,10 @@ export default function CharacterList() {
     return <p>loading...</p>;
   }
   return (
-    <ul>
+    <div className="listContainer">
       {characters.map((char) => (
-        <li key={char.id}>
-          <CharacterCard {...char} />
-        </li>
+        <CharacterCard key={char.id} {...char} />
       ))}
-    </ul>
+    </div>
   );
 }
