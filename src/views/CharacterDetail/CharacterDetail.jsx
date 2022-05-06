@@ -2,16 +2,17 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { fetchCharacter } from '../../services/fetch';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function CharacterDetail() {
   const [character, setCharacter] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     const getCharacter = async () => {
       const data = await fetchCharacter(id);
-      console.log('character data', data);
       setCharacter(data);
       setLoading(false);
     };
@@ -20,6 +21,11 @@ export default function CharacterDetail() {
   if (loading) {
     return <p>loading...</p>;
   }
+
+  const handleClick = (e) => {
+    history.push('/');
+  };
+
   return (
     <article>
       <h2>{character.name}</h2>
@@ -30,6 +36,7 @@ export default function CharacterDetail() {
           <li>Species: {character.species}</li>
         </ul>
       </section>
+      <button onClick={handleClick}>Return to Character List</button>
     </article>
   );
 }

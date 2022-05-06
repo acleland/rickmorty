@@ -15,5 +15,10 @@ describe('App', () => {
     userEvent.click(rick);
     await screen.findByAltText('Image of Rick Sanchez');
     await screen.findByText(/human/i);
+    const returnButton = screen.getByRole('button', {
+      name: /return to character list/i,
+    });
+    userEvent.click(returnButton);
+    await screen.findByText(/rick and morty characters/i);
   });
 });
